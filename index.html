@@ -141,6 +141,43 @@
       transform: translateY(-1px);
     }
 
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-left: 1rem;
+    }
+
+    .search-bar input {
+      border: 1px solid rgba(27, 27, 38, 0.1);
+      border-radius: 999px;
+      padding: 0.45rem 0.7rem;
+      font: inherit;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      font-size: 0.9rem;
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 0.45rem;
+      transition: background 0.25s ease, transform 0.25s ease;
+      font-size: 1.2rem;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(22, 90, 114, 0.08);
+      transform: translateY(-1px);
+    }
+
     .button {
       border: none;
       cursor: pointer;
@@ -508,6 +545,46 @@
       font-weight: 600;
     }
 
+    .reader-controls {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .reader-controls button {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(27, 27, 38, 0.1);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 0.4rem 0.6rem;
+      font: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .reader-controls button:hover {
+      transform: translateY(-1px);
+      background: var(--ink);
+      color: white;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(27, 27, 38, 0.1);
+      border-radius: 2px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
     .chapter-nav {
       display: flex;
       flex-wrap: wrap;
@@ -682,6 +759,61 @@
         min-height: 250px;
       }
     }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      color: #e0e0e0;
+      background:
+        radial-gradient(circle at top left, rgba(50, 50, 70, 0.9), transparent 30%),
+        radial-gradient(circle at top right, rgba(30, 60, 80, 0.95), transparent 28%),
+        linear-gradient(180deg, #1a1a2e 0%, #16213e 46%, #0f0f23 100%);
+    }
+
+    body.dark-mode .nav {
+      background: rgba(26, 26, 46, 0.82);
+      border-color: rgba(255, 255, 255, 0.07);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark-mode .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    body.dark-mode .theme-toggle:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    body.dark-mode .stat-card,
+    body.dark-mode .feature-card,
+    body.dark-mode .reader-card,
+    body.dark-mode .book-card,
+    body.dark-mode .cta-panel {
+      background: rgba(0, 0, 0, 0.4);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark-mode .button-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: #e0e0e0;
+    }
+
+    body.dark-mode .newsletter input {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: #e0e0e0;
+    }
+
+    body.dark-mode .checklist div {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    body.dark-mode .footer {
+      border-color: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.5);
+    }
   </style>
 </head>
 <body>
@@ -696,6 +828,10 @@
         <a href="#reader">Read</a>
         <a href="#community">Community</a>
         <a href="#start">Start Here</a>
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search books...">
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
       </div>
     </nav>
 
@@ -901,6 +1037,13 @@
               <span id="readerStatus">Beschikbaar</span>
               <span id="readerProgress">Kies een hoofdstuk hieronder</span>
             </div>
+            <div class="reader-controls">
+              <button id="decreaseFont">A-</button>
+              <button id="increaseFont">A+</button>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
             <div class="chapter-nav" id="readerChapters"></div>
             <div class="reader-text" id="readerText"></div>
           </div>
@@ -936,8 +1079,6 @@
       <span>Update the text, covers, and links to make it fully yours.</span>
     </footer>
   </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
 
