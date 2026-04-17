@@ -1,0 +1,16 @@
+{
+  "name": "story-harbor",
+  "version": "1.0.0",
+  "description": "A warm, playful author website for books",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": ["books", "author", "website"],
+  "author": "Your Name",
+  "license": "MIT"
+}
